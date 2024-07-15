@@ -1,0 +1,5 @@
+---
+- name: Playbook to copy selected files using a role
+  hosts: all
+  roles:
+    - file_copy_role
