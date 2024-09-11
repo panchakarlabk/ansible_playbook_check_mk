@@ -1,5 +1,13 @@
 ---
-- name: Playbook to copy selected files using a role
+- name: Check Checkmk agent version on all hosts
   hosts: all
-  roles:
-    - file_copy_role
+  gather_facts: no
+  tasks:
+    - name: Run checkmk agent version command
+      shell: cmk -V
+      register: checkmk_version_output
+      ignore_errors: yes
+
+    - name: Display Checkmk agent version
+      debug:
+        msg: "Checkmk agent version: {{ checkmk_version_output.stdout }}"
